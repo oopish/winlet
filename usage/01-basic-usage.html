@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Winlet Basic Usage</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="usage.css">
+  <script src="../build/winlet.js"></script>
+  <script>
+addEventListener('load', function () {
+    var i, l
+
+        //// Micro jQuery. 
+      , $  = document.querySelector.bind(document)
+      , $$ = document.querySelectorAll.bind(document)
+
+        //// Element refs. 
+      , $$actions = $$('#actions .button')
+      , $log      =  $('#log')
+
+        //// Create a winlet instance. 
+      , winlet = new Winlet({
+        })
+
+        //// Reveals the current state of `winlet`. 
+      , stringify = function () {
+            $log.innerHTML =
+                'JSON.stringify(winlet):\n\n'
+               + JSON.stringify(winlet, null, '  ');
+        }
+    ;
+
+    //// Enable the action buttons. 
+    for (i=0, l=$$actions.length; i<l; i++) {
+        $$actions[i].addEventListener('click', function (event) {
+            event.preventDefault();
+            try {
+                eval(this.innerHTML);
+            } catch (error) {
+                $log.innerHTML = 'Error:\n\n' + error;
+                return;
+            }
+            stringify();
+        });
+    }
+
+    //// Reveal the initial state of `winlet`. 
+    stringify();
+});
+  </script>
+</head>
+<body>
+  <header>
+    <a href="../index.html" title="Winlet Homepage">Winlet</a><span
+    >/</span><a href="../index.html#/doc/usage" title="Winlet Usage">Usage</a><span
+    >/</span><a href="01-basic-usage.html" title="Refresh this page">Winlet Basic Usage</a>
+  </header>
+  <main>
+    <nav id="actions">
+      <a href="#" class="button">winlet.add();</a><a
+         href="#" class="button">winlet.read();</a><a
+         href="#" class="button">winlet.browse();</a>
+    </nav>
+    <pre id="log">Loading...</pre>
+  </main>
+  <footer>
+    <a href="http://oopish.com/" title="Oopish Homepage">Oopish 2015</a>
+  </footer>
+</body>
+</html>
