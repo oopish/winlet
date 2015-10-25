@@ -8,9 +8,11 @@ Winlet
 
     class Winlet
       C: 'Winlet'
-      toString: -> "[object #{@C}]"
+      toString: -> '[object Winlet]'
 
       constructor: (config={}) ->
+        M = "/winlet/src/Winlet.litcoffee
+          Winlet()\n  "
 
 
 
@@ -19,10 +21,10 @@ Properties
 ----------
 
 
-#### `x <xx>`
+#### `document <HTMLDocument>`
 @todo describe
 
-        @x = null
+        @document = new Node.HTMLDocument
 
 
 
